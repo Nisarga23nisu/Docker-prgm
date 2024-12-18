@@ -1,0 +1,43 @@
+        FROM ubuntu
+        RUN apt-get update
+        CMD ["echo","Hello World..."]
+
+cd nisarga/
+ubuntu@ip-172-31-34-159:~/nisarga$ ls
+Dockerfile
+
+ubuntu@ip-172-31-34-159:~/nisarga$ docker images
+REPOSITORY         TAG       IMAGE ID       CREATED       SIZE
+firstdocker        latest    1ffc548e5f66   3 hours ago   122MB
+first-dockerfile   latest    0b603a19e67f   3 hours ago   543MB
+<none>             <none>    ef24fb4856f9   3 hours ago   543MB
+
+ubuntu@ip-172-31-34-159:~/nisarga$ docker ps -a
+CONTAINER ID   IMAGE          COMMAND                  CREATED       STATUS                   PORTS     NAMES
+ceca44a3b538   firstdocker    "echo 'Hello World..…"   3 hours ago   Exited (0) 3 hours ago             firstdocker
+40d4e9ed05d2   ef24fb4856f9   "python3 app.py"         3 hours ago   Exited (2) 3 hours ago             first-dockerfile
+
+ubuntu@ip-172-31-34-159:~/nisarga$ docker tag firstdocker nisargamk23/firstdocker:v1.0
+
+ubuntu@ip-172-31-34-159:~/nisarga$ docker images
+REPOSITORY                TAG       IMAGE ID       CREATED       SIZE
+firstdocker               latest    1ffc548e5f66   3 hours ago   122MB
+nisargamk23/firstdocker   v1.0      1ffc548e5f66   3 hours ago   122MB
+first-dockerfile          latest    0b603a19e67f   3 hours ago   543MB
+<none>                    <none>    ef24fb4856f9   3 hours ago   543MB
+
+ubuntu@ip-172-31-34-159:~/nisarga$ docker login
+Authenticating with existing credentials...
+WARNING! Your password will be stored unencrypted in /home/ubuntu/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credential-stores
+
+Login Succeeded
+
+ubuntu@ip-172-31-34-159:~/nisarga$ docker push nisargamk23/firstdocker:v1.0
+The push refers to repository [docker.io/nisargamk23/firstdocker]
+b0c0b4d93991: Pushed 
+687d50f2f6a6: Mounted from library/ubuntu 
+v1.0: digest: sha256:993e5bb07bd7d3ef0bdadd8a5c8cd18409caee7ac15e5e78c4e805cfdc543ff0 size: 741
+
+Dockerhub images will be uploaded
